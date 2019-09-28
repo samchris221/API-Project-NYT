@@ -23,18 +23,17 @@
             
             function gotData(data) {
                 sample_data = data.response.docs[0].headline.main
-                document.getElementById('temporary_output_text').innerHTML = sample_data
-                document.getElementById('article_count').innerHTML = data.response.docs.length
-                display_headline (sample_data)
-                sample_data = data.response.docs[1].headline.main
-                display_headline (sample_data)
-                window.alert('that is all, folks')
+                
+                var article_count = data.response.docs.length
+                var articles = data.response.docs
+                var output = ''
+                for (var i = 0; i < articles.length; i++) {
+                    output = output + '<h3>' + articles[i].headline.main + '</h3>'
+                    output = output + '<p>' + articles[i].snippet + '</p>'
+                }
+                document.getElementById('temporary_output_text').innerHTML = output
             }
-            function display_headline (headline_text) {
-                var heading = document.createElement('h3')
-                  heading.innerHTML = headline_text
-                document.body.insertBefore(heading,document.getElementById(temporary_output_text))
-            }
+            
             function draw() { 
                 //background(220);
                 //ellipse(50, 50, 80, 80);
@@ -45,8 +44,8 @@
         <h3>Get User Input</h3>
         <input type="text" id="myAPIkey" value="your API key">
         <button type="button" onclick="getAPIkey_and_go()">Get API key & GO</button> 
-        <p id="temporary_output_text"></p>
-        <p>Article count = <span id='article_count'></span></p>
+        <div id="temporary_output_text"></div>
+       
         
     </body>
 </html>
