@@ -24,7 +24,7 @@
                 alert("FUNCTION GOT DATA ACTIVATED")
                 var text =''
                 for (i=0; i < data.response.docs.length; i++) {
-                    text = text + data.response.docs[i].headline.main
+                    text = text + '<br />' + data.response.docs[i].headline.main
                 }
                 document.getElementById("test_output").innerHTML = text
                }
